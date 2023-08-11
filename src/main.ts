@@ -1,24 +1,32 @@
-import { createApp } from "vue";
-import App from "./App.vue";
-import router from "./router";
-import store from "./store";
-import { createPinia } from "pinia";
-import http from "@/http/http";
-import moment from "moment";
+import { createApp } from 'vue'
+import App from './App.vue'
+import router from './router'
+import store from './store'
+import { createPinia } from 'pinia'
+import http from '@/http/http'
+import moment from 'moment'
+import lodash from 'lodash'
 // 清除默认样式
-import "reset-css";
+import 'reset-css'
 // 动画库
-import "animate.css";
+import 'animate.css'
 // element-ui
-import ElementPlus from "element-plus";
-import "element-plus/dist/index.css";
+import ElementPlus from 'element-plus'
+import 'element-plus/dist/index.css'
+import mitt from 'mitt'
 // Pinia
-const pinia = createPinia();
+const pinia = createPinia()
+// EvenetBus
+const Mit = mitt()
 
-const app = createApp(App);
+const app = createApp(App)
 // 全局挂载moment
-app.config.globalProperties.$moment = moment;
+app.config.globalProperties.$moment = moment
 // 全局挂载http
-app.config.globalProperties.$http = http;
+app.config.globalProperties.$http = http
+// 全局挂载lodash
+app.config.globalProperties.$lodash = lodash
+// 全局挂载EventBus
+app.config.globalProperties.$Bus = Mit
 
-app.use(pinia).use(ElementPlus).use(store).use(router).mount("#app");
+app.use(pinia).use(ElementPlus).use(store).use(router).mount('#app')

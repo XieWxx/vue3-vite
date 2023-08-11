@@ -1,16 +1,8 @@
-import { http } from "@/http/request";
-import { userApi } from "@/http/interface/user";
-
-const register = (params: any) => {
-  return http.post(userApi.register, params);
-};
+import { http } from '@/http/request'
+import { loginApi } from '@/http/interface/login'
 
 const login = (params: any) => {
-  return http.post(userApi.login, params);
-};
+  return http.post(loginApi.login, params)
+}
 
-const logout = (params: any) => {
-  return http.post(userApi.logout, params);
-};
-
-export default { register, login, logout };
+export default { login }

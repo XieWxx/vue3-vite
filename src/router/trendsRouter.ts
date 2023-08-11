@@ -1,4 +1,4 @@
-import { RouteRecordRaw } from "vue-router";
+import { RouteRecordRaw } from 'vue-router'
 
 const trendsRouter: Array<RouteRecordRaw> = [
   // {
@@ -10,6 +10,6 @@ const trendsRouter: Array<RouteRecordRaw> = [
   //     icon: "House",
   //   },
   // },
-];
+]
 
-export default trendsRouter;
+export default trendsRouter

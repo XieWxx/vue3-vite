@@ -10,12 +10,7 @@
     <!--登录表单-->
     <div class="login-box">
       <div class="login-tit">用户登录</div>
-      <el-form
-        label-position="right"
-        label-width="100px"
-        :model="formData"
-        style="max-width: 460px"
-      >
+      <el-form label-position="right" label-width="100px" :model="formData" style="max-width: 460px">
         <el-form-item label="用户名">
           <el-input v-model="formData.userName" />
         </el-form-item>
@@ -34,27 +29,36 @@
 </template>
 
 <script setup lang="ts">
-import { storeToRefs } from "pinia";
-import useStore from "@/store";
-import { reactive, ref } from "vue";
-
-const { user } = useStore();
-const { userName, passWord } = storeToRefs(user);
+import { storeToRefs } from 'pinia'
+import useStore from '@/store'
+import useCurrentInstance from '@/utils/getCurrentInstance'
+const { $http } = useCurrentInstance()
+const { user } = useStore()
+const { userName, passWord } = storeToRefs(user)
 
 const formData = reactive({
-  userName: "", // 用户名
-  passWord: "", // 密码
-  authCode: "", // 验证码
-});
+  userName: '', // 用户名
+  passWord: '', // 密码
+  authCode: '' // 验证码
+})
 
 // 登录
 const onSubmit = () => {
+  $http
+    .login({
+      phone: '15639480130',
+      password: 'xh143353'
+    })
+    .then((res: any) => {
+      console.log(res)
+    })
   user.$patch({
     userName: formData.userName,
     passWord: formData.passWord,
-  });
-  console.log(formData, userName, passWord);
-};
+    userInfor: res.data
+  })
+  console.log(formData, userName, passWord)
+}
 </script>
 
 <style scoped>
