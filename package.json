@@ -9,18 +9,25 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "face-api.js": "^0.22.2",
+    "js-cookie": "^3.0.5",
+    "lodash": "^4.17.21",
     "mitt": "^3.0.1",
-    "vue": "^3.3.4"
+    "vue": "^3.3.4",
+    "vue3-slide-verify": "^1.1.4"
   },
   "devDependencies": {
+    "@types/js-cookie": "^3.0.3",
+    "@types/lodash": "4.14.195",
+    "@types/node": "^18.7.1",
     "@types/nprogress": "^0.2.0",
     "@vitejs/plugin-vue": "^4.2.3",
     "animate.css": "^4.1.1",
     "axios": "^1.4.0",
     "core-js": "^3.8.3",
+    "crypto-js": "^4.1.1",
     "element-plus": "^2.3.8",
-    "element-ui": "^2.4.5",
-    "lodash": "^4.17.21",
+    "jsrsasign": "^10.8.6",
     "moment": "^2.29.4",
     "nprogress": "^0.2.0",
     "pinia": "^2.1.6",

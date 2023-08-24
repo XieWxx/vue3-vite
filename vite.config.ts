@@ -26,10 +26,19 @@ export default ({ mode }) => {
     server: {
       port: 8888,
       proxy: {
-        '/api': {
-          target: 'http://localhost:3000/', //跨域地址
-          changeOrigin: true, //支持跨域
-          rewrite: path => path.replace(/^\/api/, '') //重写路径,替换/api
+        '/api/v1': {
+          // target: 'http://127.0.0.1:8118/',
+          // target: 'http://192.168.168.41:2379/csp.store/',
+          // target: "http://192.168.168.204:8118/",
+          // target: 'http://192.168.168.206:8118/', //喻
+          // target: "https://www.itcodeman.cn/",
+          // target: 'http://pd.feelingtech.net:10070/',
+          // target: 'http://192.168.1.113:8118/',
+          // target: 'http://192.168.168.136:8118/',
+          target: 'http://192.168.168.57:8888/', // 内网线上
+          // target: 'https://www.fastmock.site/mock/5eae0ecb5b89ca0a2471919c4f58264b/api',
+          changeOrigin: true //支持跨域
+          // rewrite: path => path.replace(/^\/api/, '') //重写路径,替换/api
         }
       }
     }

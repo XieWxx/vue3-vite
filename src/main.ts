@@ -3,7 +3,7 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 import { createPinia } from 'pinia'
-import http from '@/http/http'
+// import http from '@/http/axios'
 import moment from 'moment'
 import lodash from 'lodash'
 // 清除默认样式
@@ -23,7 +23,7 @@ const app = createApp(App)
 // 全局挂载moment
 app.config.globalProperties.$moment = moment
 // 全局挂载http
-app.config.globalProperties.$http = http
+// app.config.globalProperties.$http = http
 // 全局挂载lodash
 app.config.globalProperties.$lodash = lodash
 // 全局挂载EventBus
