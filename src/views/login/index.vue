@@ -5,72 +5,89 @@
  -->
 <template>
   <div class="login-bg">
-    <!--左侧Logo-->
-    <div class="logo"></div>
     <!--登录表单-->
-    <div class="login-box">
-      <div class="login-tit">用户登录</div>
-      <el-form label-position="right" label-width="100px" style="max-width: 460px">
-        <el-form-item label="用户名">
-          <el-input />
+    <div class="login-box p-10">
+      <div class="login-tit text-black text-2xl text-center mb-10">用户登录</div>
+      <el-form label-position="right" :model="form" style="max-width: 400px" ref="loginForm" :rules="rules">
+        <el-form-item prop="loginId">
+          <el-input v-model="form.loginId" placeholder="请输入用户名" />
         </el-form-item>
-        <el-form-item label="密码">
-          <el-input />
+        <el-form-item prop="password">
+          <el-input v-model="form.password" placeholder="请输入密码" type="password" />
         </el-form-item>
-        <el-form-item label="验证码">
-          <el-input />
-        </el-form-item>
-        <el-form-item>
+        <el-form-item class="float-right">
           <el-button type="primary" @click="onSubmit">登录</el-button>
         </el-form-item>
       </el-form>
     </div>
-    <slide-verify />
+    <slide-verify ref="slideRef" @onmousemove="mousemove" v-if="isShow" />
   </div>
 </template>
 
 <script setup lang="ts">
-import { getImg } from '@/api/login'
-import { ref } from 'vue'
+import { getSign } from '@/utils/encrypt'
 import slideVerify from '@/components/slide-verify/index.vue'
+import { login } from '@/api/login'
 
 // 获取dom
-const slideRef = ref<any>('')
-// 提示
-let tipsMsg = ref<string>('')
-//
-let isSuccess = ref<boolean>(false)
+const slideRef = ref()
 // 验证码弹窗
 let isShow = ref<boolean>(false)
+// 表单数据
+const form = reactive({
+  loginId: '',
+  password: ''
+})
+// 获取表单
+const loginForm = ref<HTMLFormElement>()
+// 表单校验规则
+const rules = reactive({
+  loginId: [{ required: true, message: '请输入用户名', trigger: 'blur' }],
+  password: [{ required: true, message: '请输入密码', trigger: 'blur' }]
+})
 
 // 登录
 const onSubmit = () => {
-  isShow.value = true
-  getImg().then(res => {
-    console.log('@@@@@@', res)
+  loginForm.value?.validate((valid: boolean) => {
+    if (valid) {
+      isShow.value = true
+    }
   })
+}
+
+// 滑块验证结果
+const mousemove = ({ locationX, imgToken }: { locationX: string; imgToken: string }) => {
+  // 失败-调用验证组件重新获取图片
+  const data = {
+    loginId: form.loginId,
+    password: getSign(form.password),
+    imgToken,
+    locationX
+  }
+  login(data)
+    .then((res: any) => {
+      console.log('res', res)
+      slideRef.value.loseUpdate(true)
+    })
+    .catch(() => {
+      slideRef.value.loseUpdate(false)
+    })
 }
 </script>
 
-<style scoped>
+<style scoped lang="less">
 .login-bg {
   width: 100%;
   height: 100%;
 }
 .login-box {
+  width: 400px;
   height: 300px;
-  width: 500px;
   position: absolute;
-  right: 50%;
   top: 50%;
-  transform: translate(50%, -50%);
-  background: #fff;
+  left: 50%;
+  transform: translate(-50%, -50%);
   box-shadow: var(--el-box-shadow-dark);
-  .login-tit {
-    text-align: center;
-    font-size: 20px;
-    font-weight: bold;
-    line-height: 60px;
-  }
+  border-radius: 6px;
 }
 </style>

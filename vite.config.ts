@@ -3,6 +3,7 @@ import { defineConfig, loadEnv } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import { resolve } from 'path'
 import AutoImport from 'unplugin-auto-import/vite'
+import tailwindcss from 'tailwindcss'
 export default ({ mode }) => {
   // 在启动项目时，控制台打印环境。只是给自己看当前属于什么环境和BASE_URL
   console.log(mode)
@@ -15,7 +16,8 @@ export default ({ mode }) => {
       AutoImport({
         imports: ['vue'],
         dts: 'src/utils/auto-imports.d.ts'
-      })
+      }),
+      tailwindcss
     ],
     // 配置别名
     resolve: {

@@ -34,7 +34,10 @@ interface DefaultSettings {
     dev: string
     pro: string
   }
-  PUBLIC_KEY: object
+  PUBLIC_KEY: {
+    dev: string
+    pro: string
+  }
 }
 const defaultSettings: DefaultSettings = {
   title: '后台管理系统',

@@ -1,6 +1,7 @@
-const jsrsasign = require('jsrsasign')
+import jsrsasign from 'jsrsasign/lib/jsrsasign'
 import { defaultSettings } from '@/config/defaultSettings'
-const PUBLIC_KEY = process.env.VUE_APP_TITLE === 'pro' ? defaultSettings.PUBLIC_KEY.pro : defaultSettings.PUBLIC_KEY.dev
+// const PUBLIC_KEY = process.env.VUE_APP_TITLE === 'pro' ? defaultSettings.PUBLIC_KEY.pro : defaultSettings.PUBLIC_KEY.dev
+const PUBLIC_KEY = defaultSettings.PUBLIC_KEY.dev
 /**
  * 加密
  * */

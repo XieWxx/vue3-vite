@@ -10,6 +10,7 @@ import lodash from 'lodash'
 import 'reset-css'
 // 动画库
 import 'animate.css'
+import '@/style.css'
 // element-ui
 import ElementPlus from 'element-plus'
 import 'element-plus/dist/index.css'
@@ -22,8 +23,6 @@ const Mit = mitt()
 const app = createApp(App)
 // 全局挂载moment
 app.config.globalProperties.$moment = moment
-// 全局挂载http
-// app.config.globalProperties.$http = http
 // 全局挂载lodash
 app.config.globalProperties.$lodash = lodash
 // 全局挂载EventBus

@@ -2,13 +2,13 @@ import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
 import trendsRouter from '@/router/trendsRouter'
 const staticRoutes: Array<RouteRecordRaw> = [
   {
-    path: '/slide-verify',
-    name: 'Login',
+    path: '/login',
+    name: 'login',
     meta: {
       hidden: true,
       title: '登录页'
     },
-    component: () => import('@/views/login/index.vue')
+    component: () => import('@/views/home/index.vue')
   },
   {
     path: '/',
@@ -47,7 +47,7 @@ const router = createRouter({
 // 创建一个变量，用来判断是否已经动态添加了路由  防止陷入动态路由死循环
 let needLoad = true
 // 配置白名单
-const whiteList = ['/slide-verify']
+const whiteList = ['/login']
 router.beforeEach((to, from, next) => {
   const token = sessionStorage.getItem('satoken')
   if (to.meta.title) {
@@ -57,10 +57,10 @@ router.beforeEach((to, from, next) => {
     if (whiteList.indexOf(to.path) !== -1) {
       next()
     } else {
-      next('/slide-verify')
+      next('/login')
     }
   } else {
-    if (to.path === '/slide-verify') {
+    if (to.path === '/login') {
       next('/home')
     } else {
       if (needLoad) {
